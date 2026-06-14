@@ -30,3 +30,13 @@ def print_interrupt_payload_styled(payload: dict):
             print_report_styled(report, title="Report Draft for Review")
     else:
         console.print(Panel(str(payload), title="Pause Notification", border_style="magenta"))
+
+def save_graph_image(graph, filepath: str = "graph.png"):
+    """Saves the compiled graph visualization as a PNG image."""
+    try:
+        png_bytes = graph.get_graph().draw_mermaid_png()
+        with open(filepath, "wb") as f:
+            f.write(png_bytes)
+        print(f"Graph visualization saved successfully as '{filepath}'!")
+    except Exception as e:
+        print(f"Could not save graph image to '{filepath}': {e}")
